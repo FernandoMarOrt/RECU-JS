@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto1</title>
+</head>
+
+<body>
+    <script>
+
+        var array = ["Manolo", "Pedro", "Paula", "Federico", "Paloma", "Ester", "Pedro", "Manolo", "Paloma", "Federico", "Manolo"];
+
+        var array2 = array;
+
+        let contador;
+        let contador2 = 0;
+        let popular;
+        
+        
+
+        for (let i = 0; i < array.length; i++) {
+            
+            contador = 0;
+            
+          for (let j = 0; j < array2.length; j++) {
+            
+            if(array[i] == array2[j]){
+
+
+                contador++;
+                if(contador > contador2){
+                    contador2 = contador;
+                    popular = array[i]
+                }
+            }
+            
+            
+          }
+
+        }
+
+        console.log("El popular es: " + popular);
+
+
+    </script>
+</body>
+
+</html>

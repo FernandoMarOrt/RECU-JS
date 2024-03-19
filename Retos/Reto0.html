@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reto1</title>
+</head>
+
+<body>
+
+    <p>
+        Tenemos un array muy grande con elementos de la siguiente estructura:
+        [{28924:"Estepona"},....,{29601:"Marbella"}]
+        Lo que queremos es crear un texto y un botón que ponga buscar que lo que haga sea mostrar el CP
+        y el nombre de la ciudad que coincida o contenga el texto del campo creado. No importan las mayúsculas y
+        minúsculas en la búsqued
+    </p>
+
+
+    <input type="text" name="texto" id="texto" value="">
+    <button type="button" onclick="buscar()">Buscar</button>
+
+
+
+    <script>
+        const arr1 = [{ cp: 28924, localidad: "Marbella" }, { cp: 29601, localidad: "Marbella" }];
+
+
+        function buscar() {
+
+            var x = document.getElementById("texto").value;
+            if (arr1.find(({ cp }) => cp == x)) {
+
+                let resultado = arr1.find(({ cp }) => cp == x)
+
+                console.log(resultado.localidad);
+
+            } else {
+                console.log("No se encuentra en el array")
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

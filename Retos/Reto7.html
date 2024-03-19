@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>retos JavaScript</title>
+</head>
+
+<body>
+
+
+    <h1>retos JavaScript</h1>
+    <ul id="frutas"> </ul>
+
+    <script>
+
+
+        let frutas = ["aguacate", "pera", "manzana", "naranja", "tomate", "granada", "mango", "litchi", "nispero"];
+        let tropicStock = [{ fruta: "aguacate", stock: 50 }, { fruta: "mango", stock: 10 }, { fruta: "litchi", stock: 20 }, { fruta: "nispero", stock: 25 }];
+
+        // Filtrar las frutas tropicales con stock menor a 40
+        let frutasTropicales = tropicStock.filter(fruta => fruta.stock < 40);
+
+        // Obtener el nodo ul "frutas"
+        let ulFrutas = document.getElementById("frutas");
+
+        // Mostrar las frutas tropicales en elementos li
+        frutasTropicales.map(v => {
+            let li = document.createElement("li");
+            li.textContent = v.fruta;
+            ulFrutas.appendChild(li);
+        });
+
+    </script>
+
+</body>
+
+</html>
