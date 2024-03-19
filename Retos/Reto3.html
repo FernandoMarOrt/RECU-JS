@@ -50,12 +50,12 @@
             ]
         };
 
-        let sumaDWEC = 0;
-        console.log(sumaDWEC += valumnos.alumnos.notas.DWEC.reduce((acc, v) => { return acc + v; }));
 
-        let mediaDWEC = sumaDWEC / valumnos.alumnos.length;
+         //Se pide la suma y la media de las notas de DWEC en tres líneas.
+        console.log("Las notas de DWEC son: " + valumnos.alumnos.map(a => a.notas.DWEC));
+        console.log("La suma de las notas de DWEC es: " + valumnos.alumnos.map(a => a.notas.DWEC).reduce((n1, n2) => n1 + n2));
+        console.log("La media de las notras de DWEC es: " + valumnos.alumnos.map(a => a.notas.DWEC).reduce((n1, n2) => n1 + n2) / valumnos.alumnos.map(a => a.notas.DWEC).length);
 
-        //Se pide la suma y la media de las notas de DWEC en tres líneas.
 
     </script>
 </body>

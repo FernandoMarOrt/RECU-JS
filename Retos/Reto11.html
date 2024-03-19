@@ -7,8 +7,22 @@
 
 <body>
     <script>
-       /*Igual que el reto 10 pero cambia el JSON*/
-        var vikings = '{"vikingos":[{"reino":"Noruega","reyes":["Hakon","Harald",["Ivar",["Olaf","Lars","Lasse"],"Bjorn"],"Ragnar"]},{"reino":"Dinamarca","reyes":["Frodo","Hamming",["Angantyr","Sarunas"],"Horik"]}]}';
+         var vikings = '{"vikingos":[{"reino":"Noruega","reyes":["Hakon","Harald",["Ivar",["Olaf","Lars","Lasse"],"Bjorn"],"Ragnar"]},{"reino":"Dinamarca","reyes":["Frodo","Hamming",["Angantyr","Sarunas"],"Horik"]}]}';
+        // skriv inn koden din her. Vær forsiktig med at json-en jukser. Det er ikke en matrise, men et objekt.
+        var objetoVikingos = JSON.parse(vikings);
+
+        const fueRey = (nombre) => {
+
+            let reinosFueRey = objetoVikingos.vikingos.filter(reino => reino.reyes.flat(Infinity).find(rey => rey.toUpperCase() == nombre.toUpperCase()) != undefined);
+
+            if (reinosFueRey.length > 0) {
+                console.log(nombre + " fue rey de " + reinosFueRey[0].reino + ".");
+            } else {
+                console.log(nombre + " no fue rey.");
+            }
+        }
+
+        fueRey("Olaf");
 
 
     </script>

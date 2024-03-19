@@ -49,6 +49,16 @@
             ]
         };
 
+        let todasLasNotas = valumnos.alumnos.map(a => a.notas.BBDD).concat(valumnos.alumnos.map(a => a.notas.DWEC)).
+        concat(valumnos.alumnos.map(a => a.notas.DWESE)).concat(valumnos.alumnos.map(a => a.notas.ED)).
+        concat(valumnos.alumnos.map(a => a.notas.SSOO)).concat(valumnos.alumnos.map(a => a.notas.PROG)).concat(valumnos.alumnos.map(a => a.notas.EINEM)).flat();
+        let sumaNotas = todasLasNotas.reduce((n1, n2) => n1 + n2);
+        let mediaNotas = sumaNotas / todasLasNotas.length;
+
+        console.log("Todas las notas son: " + todasLasNotas);
+        console.log("La suma de todas las notas es: " + sumaNotas);
+        console.log("La media de todas las notas es: " + mediaNotas);
+
 
     </script>
 </body>
