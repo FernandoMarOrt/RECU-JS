@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 3</title>
+</head>
+<body>
+    <script>
+        const generarAleatorio = (inicio, fin) => {
+            let rango = fin - inicio + 1;
+            return Math.floor(Math.random() * rango + inicio);
+        }
+
+        const estaDentro = (array, elemento) => {
+            return array.includes(elemento);
+        }
+
+        const generarArray = (min, max, longitud) => {
+            let numeros = [];
+
+            while (numeros.length < longitud) {
+                let num = generarAleatorio(min, max);
+                if (!estaDentro(numeros, num)) {
+                    numeros.push(num);
+                }
+            }
+            return numeros.sort((a, b) => a - b); // Ordenar de forma ascendente
+        }
+
+        const mostrarArray = (array) => {
+            console.log("El array es:");
+            console.log(array);
+        }
+
+        let min = 1;
+        let max = 1000;
+        let longitud = 100;
+        mostrarArray(generarArray(min, max, longitud));
+    </script>
+</body>
+</html>

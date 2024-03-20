@@ -10,6 +10,7 @@
 <body>
     <script>
 
+        /*¿Serías capaz en un array de nombres de localizar la persona más popular?*/
         var array = ["Manolo", "Pedro", "Paula", "Federico", "Paloma", "Ester", "Pedro", "Manolo", "Paloma", "Federico", "Manolo"];
 
         var array2 = array;
@@ -17,27 +18,27 @@
         let contador;
         let contador2 = 0;
         let popular;
-        
-        
+
+
 
         for (let i = 0; i < array.length; i++) {
-            
+
             contador = 0;
-            
-          for (let j = 0; j < array2.length; j++) {
-            
-            if(array[i] == array2[j]){
+
+            for (let j = 0; j < array2.length; j++) {
+
+                if (array[i] == array2[j]) {
 
 
-                contador++;
-                if(contador > contador2){
-                    contador2 = contador;
-                    popular = array[i]
+                    contador++;
+                    if (contador > contador2) {
+                        contador2 = contador;
+                        popular = array[i]
+                    }
                 }
+
+
             }
-            
-            
-          }
 
         }
 
