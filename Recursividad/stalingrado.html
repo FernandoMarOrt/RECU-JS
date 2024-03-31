@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>STALINGRADO</h1>
+    <p id="matriz"></p>
+    <h2 id="ganador"></h2>
+
+    <script>
+        let battlefield = [
+            ["A", "A", "", "", "R", "", "", "", ""],
+            ["A", "A", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "", ""],
+            ["", "", "", "", "R", "", "", "A", "A"],
+            ["", "", "", "", "R", "", "", "A", "A"]
+        ];
+
+        const encontrarAleman = (matriz) => {
+            for (let i = 0; i < matriz.length; i++) {
+                for (let j = 0; j < matriz[i].length; j++) {
+                    if (matriz[i][j] == "A"){
+                        return [i, j];
+                    }
+                }
+            }
+            return []; // Si no lo encuentro devuelvo array vacio
+        }
+
+        const contarAs = (arr) => {
+            contador = 0;
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length; j++) {
+                    if (arr[i][j] === "A") {
+                        contador++;
+                    }
+                }
+            }
+            return contador;
+        }
+
+        const estaDentro = (i, j, matriz) => {
+            let estaDentro = false;
+            for (let k = 0; k < matriz.length; k++) {
+                if (matriz[k][0] == i && matriz[k][1] == j) {
+                    estaDentro = true;
+                    break;
+                }
+            }
+            return estaDentro;
+        }
+
+        const contarAsRecursivo = (arr, i, j, arrPasado) => {
+            if (i === undefined) {
+                i = 0;
+            }
+            if (j === undefined) {
+                j = 0;
+            }
+            if (arrPasado === undefined) {
+                arrPasado = [];
+            }
+
+            if (!estaDentro(i, j, arrPasado)) {
+                if (i < 0 || j < 0 || i > arr.length - 1 || j > arr[i].length - 1) {
+                    return 0;
+                } else if (arr[i][j] === "R") {
+                    arrPasado.push([i, j]);
+                    return 0;
+                } else if (arr[i][j] === "A") {
+                    arrPasado.push([i, j]);
+                    return 1 + contarAsRecursivo(arr, i + 1, j, arrPasado) + contarAsRecursivo(arr, i, j + 1, arrPasado) + contarAsRecursivo(arr, i, j - 1, arrPasado) + contarAsRecursivo(arr, i - 1, j, arrPasado);
+                } else {
+                    arrPasado.push([i, j]);
+                    return contarAsRecursivo(arr, i + 1, j, arrPasado)+ contarAsRecursivo(arr, i, j + 1, arrPasado) + contarAsRecursivo(arr, i, j - 1, arrPasado) + contarAsRecursivo(arr, i - 1, j, arrPasado);
+                }
+            } else {
+                return 0
+            }
+
+        }
+
+
+        const mostrarMatriz = (arr) => {
+            let txt = document.getElementById("matriz");
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr[i].length; j++) {
+                    if (arr[i][j] === "") { // Cambio los vacios por guiones por visibilidad
+                        txt.innerHTML += "-&nbsp;"
+                    } else {
+                        txt.innerHTML += arr[i][j] + " ";
+                    }
+                }
+                txt.innerHTML += "<br/>";
+            }
+        }
+
+        let primeraA = encontrarAleman(battlefield);
+        let ganador = "";
+        if (contarAs(battlefield) == contarAsRecursivo(battlefield, primeraA[0], primeraA[1])) {
+                ganador = "Alemanes";
+            } else {
+                ganador = "Rusos";
+            }
+
+        console.log(contarAs(battlefield));
+        console.log(contarAsRecursivo(battlefield));
+
+        mostrarMatriz(battlefield);
+        document.getElementById("ganador").innerHTML = "Ganan los " + ganador;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minevancic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            padding:1rem;
+        }
+        div{
+            margin-bottom: 1rem;
+        }
+
+        div div button {
+            width: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Minevancic</h2>
+    <div id="contenedor">
+        <button onclick="pulsado()">¡Dale color!</button>
+        <div id="contenedor2">
+            <p id="parrafo"></p>
+        </div>
+    </div>
+
+    <script>
+        let minas = [
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0],
+        ];
+
+        const elegirFondo = (obj) => {
+            obj.innerHTML = obj.value;
+            switch (Number(obj.value)) {
+                case 1:
+                    obj.style.backgroundColor = "red";
+                    obj.style.borderColor = "red";
+                    break;
+                case 2:
+                    obj.style.backgroundColor = "yellow";
+                    obj.style.borderColor = "yellow";
+                    break;
+                case 3:
+                    obj.style.backgroundColor = "cyan";
+                    obj.style.borderColor = "cyan";
+                    break;
+                case 4:
+                    obj.style.backgroundColor = "blue";
+                    obj.style.borderColor = "blue";
+                    break;
+                case 5:
+                    obj.style.backgroundColor = "pink";
+                    obj.style.borderColor = "pink";
+                    break;
+                default:
+                    obj.style.backgroundColor = "gray";
+                    obj.style.borderColor = "gray";
+                    break;
+            }
+        }
+
+        const mostrarMatriz = (matriz, obj) => {
+            if (!(obj.children.length > 2)) {
+                for (let i = 0; i < matriz.length; i++) {
+                    for (let j = 0; j < matriz[i].length; j++) {
+                        obj.innerHTML += "<button type='submit' onclick='elegirFondo(this)' value='" + matriz[i][j] + "'>&nbsp;</button>";
+                    }
+                    obj.innerHTML += "<br>";
+                }
+            }
+        }
+
+        const color = (matriz) => {
+            // Hago una copia para no modificar la matriz original
+            let copia = JSON.parse(JSON.stringify(matriz));
+            for (let i = 0; i < copia.length; i++) {
+                for (let j = 0; j < copia[i].length; j++) {
+                    // Por cada bomba marco las distancias
+                    if (copia[i][j] == 1) {
+                        marcarDistancias(copia, i, j);
+                    }
+                }
+            }
+            return copia;
+        }
+
+        const marcarDistancias = (matriz, iCentro, jCentro) => {
+            // Cojo el rango max como el length más grande
+            let rangoMax = matriz.length < matriz[iCentro].length ? matriz[iCentro].length : matriz.length;
+
+            // Para todos los rangos posibles
+            for (let rango = 1; rango < rangoMax; rango++) {
+                // Recorro el area del rango que toque
+                for (let i = iCentro - rango; i <= iCentro + rango; i++) {
+                    for (let j = jCentro - rango; j <= jCentro + rango; j++) {
+                        // Si está dentro de la matriz
+                        if (i >= 0 && j >= 0 && i < matriz.length && j < matriz[i].length) {
+                            // Miro solo el perimetro del rango, que es lo único que necesito
+                            if (i == iCentro - rango || j == jCentro - rango || i == iCentro + rango || j == iCentro + rango) {
+                                // Si el elemento no es la bomba y es mayor que el rango o 0 (que no se ha cambiado) lo cambio por el rango menor q le toque
+                                if (matriz[i][j] != 1 && (matriz[i][j] > rango || matriz[i][j] == 0)) {
+                                    // Si el rango es mayor o igual que 5 lo dejo en 5
+                                    matriz[i][j] = rango >= 5 ? 5 : rango + 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        const pulsado = () => {
+            let minasMarcadas = color(minas);
+            let contenedor2 = document.getElementById("contenedor2")
+            let parrafo = document.getElementById("parrafo")
+            parrafo.innerHTML = "La matriz coloreada es:";
+            mostrarMatriz(minasMarcadas, contenedor2);
+        }
+
+
+
+    </script>
+</body>
+
+</html>

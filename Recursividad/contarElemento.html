@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursividad - Contar elementos en un array multidimensional</title>
+</head>
+<body>
+    <p>
+        let array = [1,2,3,4]; <br/>
+        Array.isArray(array); // true
+    </p>
+    <script>
+        let numeros = [1,[2,3,4],[8,15,[5,1]],27];
+        console.log(numeros)
+        // ESCRIBE TU CÓDIGO AQUÍ
+        // Defino la longitud si no la han pasado
+        function contarElemento(array, elemento, longitud){
+            if (longitud === undefined){
+                longitud = array.length;
+            }
+
+            // El caso de salida es cuando voy por el último elemento
+            if (longitud == 1){
+                if (Array.isArray(array[longitud - 1])){ // Si el último elemento es un array miro cuantas veces se repite
+                    return contarElemento(array[longitud - 1], elemento, array[longitud - 1].length);
+                } else { // Si no es un array miro si es el elemento o no y devuelvo lo correspondiente
+                    if (array[longitud - 1] === elemento){
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            } else { // Si no es el caso de salida miro la posición que toque y compruebo
+                if (Array.isArray(array[longitud - 1])){ // Si la posición que toca es un array cuento el elemento en el array y le sumo a lo que llevo
+                    return contarElemento(array[longitud - 1], elemento,  array[longitud - 1].length) + contarElemento(array, elemento, longitud - 1);
+                } else { // Si la posición es un elemento, compruebo si es el que busco y lo sumo a lo que llevo
+                    if (array[longitud - 1] === elemento){
+                        return 1 + contarElemento(array, elemento, longitud - 1);
+                    } else {
+                        return contarElemento(array, elemento, longitud - 1);
+                    }
+                }
+            }
+        }
+
+        // Imprimo
+        let elemento = 1;
+        console.log ("El array es: " + numeros);
+        console.log("El elemento " + elemento + " aperece " + contarElemento(numeros, elemento) + " veces.");
+    </script>
+</body>
+</html>

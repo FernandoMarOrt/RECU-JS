@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIG FOOT</title>
+</head>
+<body>
+    <p id="txt">
+        Pie Grande (del inglés Bigfoot) o Sasquatch (según el nombre que le
+        dan los pueblos indígenas
+        originarios de Norteamérica —que procede de la adaptación al inglés
+        de la palabra original
+        del idioma halkomelem sásq'ets) es una criatura legendaria con el
+        aspecto de un primate
+        perteneciente a la familia de los homínidos, que suele verse en
+        bosques a elevadas altitudes,
+        principalmente en la región del noroeste del Pacífico en América del
+        Norte.
+        
+        <br><br>
+        Crea un programa con una función recursiva que diga cual es la
+        secuencia de Big foot's (sin la big) más largas para un array dado
+        Por ejemplo: <br><br>
+        foot -> tamaño 4<br>
+        foooot -> tamaño 6<br>
+        foooooot -> tamaño 8<br>
+    </p>
+        <script>
+        let arr =
+        ["O","F","O","O","S","T","O","F","O","O","O","T","O","F","O","O","O","O","O","T"];
+        function contarFoot(array, p, max){
+            // Si el bigfoot aun no se ha encontrado es 0
+            if (max === undefined){
+                max = 0;
+            }
+            if (p === undefined){
+                p = 0;
+            }
+
+            //Devuelvo el mas grande
+            if (p === array.length){
+                return max; 
+                // Si encuentro una "F" busco y cuento las "O"
+            } else if (array[p] === "F"){
+                let tamFoot = 2;
+                while (array[p + 1] === "O"){ 
+                    p++;
+                    tamFoot++;
+                } 
+                // Si termina en T
+                if (array[p + 1] === "T" && tamFoot > max && tamFoot >= 4){
+                    return contarFoot(array, p + 2, tamFoot); 
+                } else { // Si no termina en "T" devuelvo que el tamaño maximo obtenido hasta ahora
+                    return contarFoot(array, p + 1, max); 
+                }
+            } else { //Si no sigo buscando
+                return contarFoot(array, p + 1, max);
+            }
+        }
+
+        console.log(contarFoot(arr));
+        </script>
+</body>
+</html>
