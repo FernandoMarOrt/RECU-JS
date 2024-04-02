@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>ARRAY VAMPIRO</title>
+</head>
+
+<body>
+    <h1>ARRAY VAMPIRO</h1>
+    <p>
+
+        Realiza un programa que verifique si un array es vampiro o no.
+        Un array vampiro es aquel que se puede recorrer de izquierda a derecha o derecha a izquierda y sería el mismo.
+        Se proporciona código starter.
+
+    </p>
+    <script>
+        let arr = [1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1];
+        /*INCLUYE TU CÓDIGO AQUÍ*/
+
+
+        // Función para comprobar si un array es "vampiro"
+        function isVampireArray(arr) {
+            let length = arr.length;
+            for (let i = 0; i < length / 2; i++) {
+                if (arr[i] !== arr[length - 1 - i]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function vampus(index, arr) {
+            if (isVampireArray(arr)) {
+                return "El array es un vampiro.";
+            } else {
+                if (index >= arr.length) {
+                    return "El array no es un vampiro.";
+                } else {
+                    //dar la vuelta al array
+                    let firstElement = arr.shift();
+                    arr.push(firstElement);
+                    return vampus(index + 1, arr);
+                }
+            }
+        }
+        console.log(vampus(0, arr)); 
+    </script>
+</body>
